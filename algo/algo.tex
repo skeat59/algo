@@ -1,4 +1,4 @@
-\documentclass [11pt]{report}
+ \documentclass [11pt]{report}
 
 \usepackage{fancyhdr}
 \usepackage [french]{babel}
@@ -18,5 +18,76 @@
 \usepackage{eso-pic}
 \pagestyle{fancy}	
 \begin{document}
+/* t\_eltsFile */ \\
+\indent \indent t\_File = \textuparrow t\_xxx \\
+\indent \indent t\_xxx = enregistrement \\
+\indent \indent \indent t\_eltFile elt \\
+\indent \indent \indent t\_File tete, queue, suiv, prec\\
+\indent \indent fin enregistrement t\_xxx\\
+\\
+\\
+algorithme fonction File\_Vide: t\_File \\
+debut\\
+\indent retourne(NUL)\\
+fin algorithme fonction File\_Vide\\
+\\
+algorithme fonction Est\_Vide: booleen\\
+\indent parametres locaux \\
+\indent \indent t\_File F
+debut \\
+\indent retourne ( NUL = p )\\
+fin algorithme fonction Est\_Vide\\
+\\
+			algorithme fonction enfiler: t\_File\\
+\indent 		parametres locaux \\
+\indent \indent 	t\_File F \\
+\indent \indent 	t\_eltFile e\\
+\indent 		variables \\
+\indent \indent 	t\_pile tmp\\
+			debut\\
+\indent			allouer (tmp)\\
+\indent 		tmp\textuparrow.elt <- e\\
+\indent 		queue\textuparrow.suiv <- tmp\\
+\indent 		queue <- queue\textuparrow.suiv\\
+\indent 		retourne (tete)\\
+			fin algorithme fonction enfiler\\
+\\
+\newpage
+						algorihtme fonction defiler: t\_File \\
+\indent				 		parametres globaux\\
+\indent \indent			 		t\_File F \\
+\indent				 		variables \\
+\indent \indent 				t\_File tmp\\
+\indent \indent					t\_Fileelt e
+\indent 				debut \\
+\indent \indent 			si NUL <> p alors\\
+\indent \indent \indent 		allouer (tmp)
+\indent \indent \indent 		tmp <- tete\textuparrow.suiv \\
+\indent \indent \indent 		
+\indent \indent \indent 		liberer (tete)\\
+\indent \indent 			sinon\\
+\indent \indent \indent 		tmp <-NUL\\
+\indent\indent 				fin si\\
+\indent \indent 			retourne (tmp)\\
+\indent 				fin algorithme fonction defiler\\
+
+\indent algorithme fonction destruction: t\_File\\
+\indent \indent  parametres globaux\\
+\indent \indent \indent t\_File F\\
+\indent debut \\
+\indent \indent si NUL <> p\textuparrow.suiv alors\\
+\indent \indent \indent tant que tete\textuparrow.suiv <> NUL \\
+\indent \indent \indent \indent tmp <-tete\textuparrow.suiv \\
+\indent \indent \indent \indent liberer (tete)\\
+\indent \indent \indent \indent tete <-tmp\\
+\indent \indent \indent fin tant que \\
+\indent \indent \indent retourne (tete)\\
+\indent \indent sinon\\
+\indent \indent \indent tete <- NUL\\
+\indent \indent fin si\\
+\indent fin algorithme fonction destruction\\
+\newpage
+exercice 2.4\\
+\indent 1) La liste est construite a l'envers.\\
 
 \end{document}
