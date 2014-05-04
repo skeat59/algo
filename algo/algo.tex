@@ -15,79 +15,118 @@
 \usepackage{color}
 \usepackage{graphicx}
 
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+
+
 \usepackage{eso-pic}
 \pagestyle{fancy}	
+
+\tikzset{
+  treenode/.style = {align=center, inner sep=0pt, text centered,
+    font=\sffamily},
+ arn_r/.style = {treenode, circle, black, draw=black, 
+     text width=1.5em, very thick},
+  arn_r/.style = {treenode, circle, black, draw=black, 
+    text width=1.5em, very thick},
+  arn_x/.style = {treenode, rectangle, draw=black,
+    minimum width=0.5em, minimum height=0.5em}% arbre rouge noir, nil
+}
+
+
 \begin{document}
-/* t\_eltsFile */ \\
-\indent \indent t\_File = \textuparrow t\_xxx \\
-\indent \indent t\_xxx = enregistrement \\
-\indent \indent \indent t\_eltFile elt \\
-\indent \indent \indent t\_File tete, queue, suiv, prec\\
-\indent \indent fin enregistrement t\_xxx\\
-\\
-\\
-algorithme fonction File\_Vide: t\_File \\
-debut\\
-\indent retourne(NUL)\\
-fin algorithme fonction File\_Vide\\
-\\
-algorithme fonction Est\_Vide: booleen\\
-\indent parametres locaux \\
-\indent \indent t\_File F
-debut \\
-\indent retourne ( NUL = p )\\
-fin algorithme fonction Est\_Vide\\
-\\
-			algorithme fonction enfiler: t\_File\\
-\indent 		parametres locaux \\
-\indent \indent 	t\_File F \\
-\indent \indent 	t\_eltFile e\\
-\indent 		variables \\
-\indent \indent 	t\_pile tmp\\
-			debut\\
-\indent			allouer (tmp)\\
-\indent 		tmp\textuparrow.elt <- e\\
-\indent 		queue\textuparrow.suiv <- tmp\\
-\indent 		queue <- queue\textuparrow.suiv\\
-\indent 		retourne (tete)\\
-			fin algorithme fonction enfiler\\
-\\
-\newpage
-						algorihtme fonction defiler: t\_File \\
-\indent				 		parametres globaux\\
-\indent \indent			 		t\_File F \\
-\indent				 		variables \\
-\indent \indent 				t\_File tmp\\
-\indent \indent					t\_Fileelt e
-\indent 				debut \\
-\indent \indent 			si NUL <> p alors\\
-\indent \indent \indent 		allouer (tmp)
-\indent \indent \indent 		tmp <- tete\textuparrow.suiv \\
-\indent \indent \indent 		
-\indent \indent \indent 		liberer (tete)\\
-\indent \indent 			sinon\\
-\indent \indent \indent 		tmp <-NUL\\
-\indent\indent 				fin si\\
-\indent \indent 			retourne (tmp)\\
-\indent 				fin algorithme fonction defiler\\
+\underline{{\huge Exercice 1}}\\
+\indent \underline{question 1:} \vspace{2.5mm}
+	 repr\'esentation par tas de la figure 1.\\
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+\hline 5 & 8 & 12 & 9 & 11 & 20 & 15 & 18 & 10 & 13 \\ 
+\hline 
+\end{tabular} 
 
-\indent algorithme fonction destruction: t\_File\\
-\indent \indent  parametres globaux\\
-\indent \indent \indent t\_File F\\
-\indent debut \\
-\indent \indent si NUL <> p\textuparrow.suiv alors\\
-\indent \indent \indent tant que tete\textuparrow.suiv <> NUL \\
-\indent \indent \indent \indent tmp <-tete\textuparrow.suiv \\
-\indent \indent \indent \indent liberer (tete)\\
-\indent \indent \indent \indent tete <-tmp\\
-\indent \indent \indent fin tant que \\
-\indent \indent \indent retourne (tete)\\
-\indent \indent sinon\\
-\indent \indent \indent tete <- NUL\\
-\indent \indent fin si\\
-\indent fin algorithme fonction destruction\\
-\newpage
-exercice 2.4\\
-\indent 1) La liste est construite a l'envers.\\
+\vspace{5mm}
 
+\indent \underline{question 2:}\\
+a- La racine se trouve a place 1 du vecteur.\\
+b- Les fils d'un nœud se trouve \`a 2x(place du nœud) et \`a 2x(position du nœud) + 1 \\
+c- Pour retrouver le p\`ere d'un noeud il faut faire (position du nœud) div 2. O\`u div est la division enti\`ere\\
+d- Le nœud est une feuille dans le cas ou les cases du vecteur 2x(position du nœud) et 2x(position du nœud) + 1 sont vide ou si elle n'existe pas\\
+e- Un nœud est un point simple si l'une des cases, correspondant a ses fils, dans le vecteur est vide.\\
+
+\vspace{10mm}
+
+\underline{{\huge Exercice 2:}}\\
+\indent \underline{question 1: Ajout}\\
+\indent a- On ajoute l'\'el\'ement en feuille, puis on le fais remonter en l'\'echangeant avec son p\`ere jusqu'a ce qu'il se trouve a sa place. c'est-\`a-dire lorsque son p\`ere est inf\'erieur au nouvel \'el\'ement.\\
+\indent b- Apr\`es l'ajout de la valeur 4:
+
+\begin{tikzpicture}[->,>=stealth',level/.style={sibling distance = 5cm/#1,
+  level distance = 1.5cm}] 
+\node [arn_r] {4}
+    child{ node [arn_r] {5} 
+            child{ node [arn_r] {9} 
+            	child{ node [arn_r] {18}} 
+				child{ node [arn_r] {10}}
+            }
+            child{ node [arn_r] {8}
+							child{ node [arn_r] {13}}
+							child{ node [arn_r] {11}}
+            }                            
+    }
+    child{ node [arn_r] {12}
+            child{ node [arn_r] {20} 
+            	child {node [arn_x] {}}
+            	child {node [arn_x] {}}        	
+          	}
+            child{ node [arn_r] {15}
+            	child{node [arn_x] {}}
+            	child{node [arn_x]{}}
+            }
+   };
+\end{tikzpicture}
+\\
+\vspace{2.5mm}\\
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\hline K & J & I & B & Q & C & G & D & F & E & H \\ 
+\hline 4 & 5 & 12 & 9 & 8 & 20 & 15 & 18 & 10 & 13 & 11 \\ 
+\hline 
+\end{tabular} \\
+\vspace{10mm}\\
+\indent Apr\`es l'ajout de 10:\\
+\begin{tikzpicture}[->,>=stealth',level/.style={sibling distance = 5cm/#1,
+  level distance = 1.5cm}] 
+\node [arn_r] {4}
+    child{ node [arn_r] {5} 
+            child{ node [arn_r] {9} 
+            	child{ node [arn_r] {18}} 
+				child{ node [arn_r] {10}}
+            }
+            child{ node [arn_r] {8}
+							child{ node [arn_r] {13}}
+							child{ node [arn_r] {11}}
+            }                            
+    }
+    child{ node [arn_r] {10}
+            child{ node [arn_r] {12} 
+            	child {node [arn_r] {20}}
+            	child {node [arn_x] {}}        	
+          	}
+            child{ node [arn_r] {15}
+            	child{node [arn_x] {}}
+            	child{node [arn_x]{}}
+            }
+   };
+\end{tikzpicture}
+\\
+\vspace{2.5mm}\\
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\hline K & J & I & B & Q & C & G & D & F & E & H \\ 
+\hline 4 & 5 & 12 & 9 & 8 & 20 & 15 & 18 & 10 & 13 & 11 \\ 
+\hline 
+\end{tabular} \\
+\vspace{5mm}\\
+\indent c- algorithme d'ajout dans un tas:\\
+algorithme procedure ajout\\
+\indent parametres globaux\\
+\indent \indent t\_hierar tas\\
+ 
 \end{document}
