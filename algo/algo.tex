@@ -124,9 +124,124 @@ e- Un nœud est un point simple si l'une des cases, correspondant a ses fils, da
 \hline 
 \end{tabular} \\
 \vspace{5mm}\\
-\indent c- algorithme d'ajout dans un tas:\\
+ c- algorithme d'ajout dans un tas:\\
 algorithme procedure ajout\\
 \indent parametres globaux\\
-\indent \indent t\_hierar tas\\
- 
+\indent \indent t\_tas tas\\
+\indent parametres locaux\\
+\indent \indent t\_element elt\\
+\indent \indent reel val\\
+\indent variables\\
+\indent \indent reel tmp\\
+\indent \indent t\_element tmp2\\
+debut\\
+\indent taille <- taille + 1\\
+\indent place <- taille\\
+\indent tas.elt[place] <- val\\
+\indent tant que tas.elt[place] < tas.elt[place div 2] faire\\
+\indent \indent tmp <- tas.elt[place div 2]\\
+\indent \indent tmp2 <- tas.elt[place div 2]\\
+\indent \indent place <- place div 2\\
+\indent \indent tas.elt[place] <- tas.elt[taille]\\
+\indent \indent tas.elt[taille] <- tmp\\
+\indent \indent tas.elt[taille] <- tmp2\\
+\indent  fin tant que\\
+fin algorithme procedure ajout\\
+
+
+d- la complexit\'e de cet algo est O(log(n))\\
+\vspace{7.5mm}\\
+2-supression\\
+\indent a- La valeur minimum est la premi\`ere valeur du tas, donc la racine de l'arbre. Pour la supprimer on la passe en feuille, pour cela on l'\'echange avec le dernier \'el\'ement du tas. Puis on remet la nouvelle racine a sa place dans le tas pour que l'on continue a respecter la relation d'ordre. \\
+\vspace{5mm}\\
+\indent b- le tas apr\`es la supression de la valeur minimum.\\
+\begin{tikzpicture}[->,>=stealth',level/.style={sibling distance = 5cm/#1,
+  level distance = 1.5cm}] 
+\node [arn_r] {5}
+    child{ node [arn_r] {8} 
+            child{ node [arn_r] {9} 
+            	child{ node [arn_r] {18}} 
+				child{ node [arn_r] {10}}
+            }
+            child{ node [arn_r] {11}
+							child{ node [arn_r] {13}}
+							child{ node [arn_r] {20}}
+            }                            
+    }
+    child{ node [arn_r] {10}
+            child{ node [arn_r] {12} 
+            	child {node [arn_x] {}}
+            	child {node [arn_x] {}}        	
+          	}
+            child{ node [arn_r] {15}
+            	child{node [arn_x] {}}
+            	child{node [arn_x]{}}
+            }
+   };
+\end{tikzpicture}\\
+\vspace{2mm}\\
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\hline J & Q & F  & B & H  & I  & G  &  D & L  & E  & C \\ 
+\hline 5 & 8 & 10 & 9 & 11 & 12 & 15 & 18 & 10 & 13 & 20 \\ 
+\hline 
+\end{tabular} \\
+\newpage
+ c- Alorithme de suppression \\
+algorithme procedure suppression\\
+\indent parametres globaux \\
+\indent \indent t\_tas tas\\
+\indent variables\\
+\indent \indent entier place\\
+debut \\
+\indent swap(tas.elt[1], tas.elt[taille])\\
+\indent taille <- taille - 1\\
+\indent place <- 1
+\indent tant que (tas.elt[place] > tas.elt[2*place] ou tas.elt[2*place + 1]) faire \\
+\indent \indent si tas.elt[2*place] < tas.elt[2*place + 1] alors\\
+\indent \indent \indent	swap(tas.elt[place], tas.elt[2*place])\\
+\indent \indent \indent	place <- 2*place\\
+\indent \indent	sinon\\
+\indent \indent \indent	swap(tas.elt[place], tas.eltp[2*place + 1])\\
+\indent \indent \indent	place <- 2*place + 1\\
+\indent \indent	fin si\\
+\indent fin tant que\\
+fin algorithme procedure suppression\\
+\vspace{5mm}\\
+ d- la complexite de cette algorithme est de l'autre de O(log(taille du tas))
+ \vspace{10mm}\\
+ \underline{{\huge Exercice 3:}}\\
+\underline{question 1: Minimisation}\\
+\indent a- Modification de la valeur de H par 4\\
+\begin{tikzpicture}[->,>=stealth',level/.style={sibling distance = 5cm/#1,
+  level distance = 1.5cm}] 
+\node [arn_r] {4}
+    child{ node [arn_r] {5} 
+            child{ node [arn_r] {9} 
+            	child{ node [arn_r] {18}} 
+				child{ node [arn_r] {10}}
+            }
+            child{ node [arn_r] {8}
+							child{ node [arn_r] {13}}
+							child{ node [arn_r] {20}}
+            }                            
+    }
+    child{ node [arn_r] {10}
+            child{ node [arn_r] {12} 
+            	child {node [arn_x] {}}
+            	child {node [arn_x] {}}        	
+          	}
+            child{ node [arn_r] {15}
+            	child{node [arn_x] {}}
+            	child{node [arn_x]{}}
+            }
+   };
+\end{tikzpicture}\\
+\vspace{2mm}\\
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\hline H & J & F  & B & Q & I  & G  &  D & L  & E  & C \\ 
+\hline 4 & 5 & 10 & 9 & 8 & 12 & 15 & 18 & 10 & 13 & 20 \\ 
+\hline 
+\end{tabular} \\
+\vspace{5mm}\\
+\indent \underline{ b- algorithme modif\_tas}\\
 \end{document}
