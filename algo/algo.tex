@@ -18,6 +18,8 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows}
 
+\usetikzlibrary{trees}
+
 
 \usepackage{eso-pic}
 \pagestyle{fancy}	
@@ -41,9 +43,9 @@
 \begin{center}
 {\Huge Devoir Maison}\\ {\LARGE \textit{13 Mai 2014}}\\
 \end{center}
-\vspace{110mm}\\
+\vspace{110mm}
 \begin{flushright}
-Epita Promo 2019
+Epita Promo 2019\\
 \end{flushright}
 \newpage
 \underline{{\huge Exercice 1}}\\
@@ -119,19 +121,15 @@ e- Un nœud est un point simple si l'une des cases, correspondant a ses fils, da
     child{ node [arn_r] {10}
             child{ node [arn_r] {12} 
             	child {node [arn_r] {20}}
-            	child {node [arn_x] {}}        	
-          	}
-            child{ node [arn_r] {15}
-            	child{node [arn_x] {}}
-            	child{node [arn_x]{}}
-            }
+               child{ node [arn_r] {15}} 	
+  			}
+  			child{ node [arn_x]{}}         
    };
-\end{tikzpicture}
-\\
+\end{tikzpicture}\\
 \vspace{2.5mm}\\
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
-\hline K & J & I & B & Q & C & G & D & F & E & H \\ 
-\hline 4 & 5 & 12 & 9 & 8 & 20 & 15 & 18 & 10 & 13 & 11 \\ 
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline K & J & L  & B & Q & I  & D  & F  & E  & H  & C  & G \\ 
+\hline 4 & 5 & 10 & 9 & 8 & 12 & 18 & 10 & 13 & 11 & 20 & 15\\ 
 \hline 
 \end{tabular} \\
 \vspace{5mm}\\
@@ -155,8 +153,6 @@ debut\\
 \indent \indent tas[taille] <- tmp[1]\\
 \indent  fin tant que\\
 fin algorithme procedure ajout\\
-
-
 d- la complexit\'e de cet algo est O(log(n))\\
 \vspace{7.5mm}\\
 2-supression\\
@@ -193,7 +189,6 @@ d- la complexit\'e de cet algo est O(log(n))\\
 \hline 5 & 8 & 10 & 9 & 11 & 12 & 15 & 18 & 10 & 13 & 20 \\ 
 \hline 
 \end{tabular} \\
-\newpage
  c- Alorithme de suppression \\
 algorithme procedure suppression\\
 \indent parametres globaux \\
