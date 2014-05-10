@@ -35,6 +35,17 @@
 
 
 \begin{document}
+{\huge Gdalia Thibault}\\
+\indent {\huge Sup D2}\\
+\vspace{20mm}\\
+\begin{center}
+{\Huge Devoir Maison}\\ {\LARGE \textit{13 Mai 2014}}\\
+\end{center}
+\vspace{110mm}\\
+\begin{flushright}
+Epita Promo 2019
+\end{flushright}
+\newpage
 \underline{{\huge Exercice 1}}\\
 \indent \underline{question 1:} \vspace{2.5mm}
 	 repr\'esentation par tas de la figure 1.\\
@@ -132,19 +143,16 @@ algorithme procedure ajout\\
 \indent \indent t\_element elt\\
 \indent \indent reel val\\
 \indent variables\\
-\indent \indent reel tmp\\
-\indent \indent t\_element tmp2\\
+\indent \indent t\_tas tmp\\
 debut\\
 \indent taille <- taille + 1\\
 \indent place <- taille\\
-\indent tas.elt[place] <- val\\
-\indent tant que tas.elt[place] < tas.elt[place div 2] faire\\
-\indent \indent tmp <- tas.elt[place div 2]\\
-\indent \indent tmp2 <- tas.elt[place div 2]\\
+\indent tas[place] <- (elt,val)\\
+\indent tant que tas[place] < tas[place div 2] faire\\
+\indent \indent tmp[1] <- tas[place div 2]\\
 \indent \indent place <- place div 2\\
-\indent \indent tas.elt[place] <- tas.elt[taille]\\
-\indent \indent tas.elt[taille] <- tmp\\
-\indent \indent tas.elt[taille] <- tmp2\\
+\indent \indent tas[place] <- tas[taille]\\
+\indent \indent tas[taille] <- tmp[1]\\
 \indent  fin tant que\\
 fin algorithme procedure ajout\\
 
@@ -195,13 +203,13 @@ algorithme procedure suppression\\
 debut \\
 \indent swap(tas.elt[1], tas.elt[taille])\\
 \indent taille <- taille - 1\\
-\indent place <- 1
-\indent tant que (tas.elt[place] > tas.elt[2*place] ou tas.elt[2*place + 1]) faire \\
-\indent \indent si tas.elt[2*place] < tas.elt[2*place + 1] alors\\
-\indent \indent \indent	swap(tas.elt[place], tas.elt[2*place])\\
+\indent place <- 1\\
+\indent tant que (tas[place] > tas[2*place] ou tas[place] > tas[2*place + 1]) faire \\
+\indent \indent si tas[2*place] < tas[2*place + 1] alors\\
+\indent \indent \indent	swap(tas[place], tas[2*place])\\
 \indent \indent \indent	place <- 2*place\\
 \indent \indent	sinon\\
-\indent \indent \indent	swap(tas.elt[place], tas.eltp[2*place + 1])\\
+\indent \indent \indent	swap(tas[place], tas[2*place + 1])\\
 \indent \indent \indent	place <- 2*place + 1\\
 \indent \indent	fin si\\
 \indent fin tant que\\
@@ -243,5 +251,28 @@ fin algorithme procedure suppression\\
 \hline 
 \end{tabular} \\
 \vspace{5mm}\\
-\indent \underline{ b- algorithme modif\_tas}\\
+\indent \underline{ b- algorithme modif\_tas:}\\
+\indent algorithme procedure modif\_tas\\
+\indent \indent parametres globaux\\
+\indent \indent \indent t\_tas t\\
+\indent \indent parametres locaus\\
+\indent \indent \indent t\_element elt\\
+\indent \indent \indent reel x\\
+\indent \indent variables\\
+\indent \indent \indent entier r\\
+\indent debut\\
+\indent \indent r <- 1\\
+\indent \indent tant que tas.elt[r] <> elt faire\\
+\indent \indent \indent r <- r+1\\
+\indent \indent fin tant que\\
+\indent \indent tas[r] <- (elt, x)\\
+\indent \indent tant que tas[r] < tas[r div 2]\\
+\indent \indent \indent swap(tas[r], tas[r div 2])\\
+\indent \indent \indent r <- r div 2\\
+\indent \indent fin tant que\\
+\indent fin algorithme modif\_tas\\
+\vspace{5mm}\\
+\underline{Question 2: Optimisation}\\
+\indent a-La COmplexit\'e d'un algorithme de recherche est O(taille du tas).\\
+\indent b- Si on avait l'ancienne valeur de l'\'el\'ement \`a modifi\'e on pourrait le trouvait plus rapidement et la complexit\'e passerait \`a O(log(taille du tas)).
 \end{document}
